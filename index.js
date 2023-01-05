@@ -11,13 +11,40 @@ fs.readFile(`./txt/start.txt`, `utf-8`, (error,startData)=>{
     //console.log(startData==='read-this')
     //console.log(readThisData)
     fs.readFile(`./txt/append.txt`,`utf-8`,(error, appendData)=>{
-      console.log(appendData)
+//      console.log(appendData)
       fs.writeFile(`./txt/final.txt`,`${readThisData}\n\n${appendData}`,`utf-8`,(error)=>{
-        console.log("File has been written")
+ //       console.log("File has been written")
       })
     })
-    
   })
+})
+
+
+//creating a web server
+const http = require("http")
+const url = require("url")
+const PORT = 8000
+
+const server = http.createServer((req,res)=>{
+  const pathName = req.url
+  
+  if(pathName=== "/" || pathName === "/home"){
+    res.end("Welcome to NodeJS")
+  }
+  else if(pathName=== "/product"){
+    res.end("Welcome to the product page")
+  }
+  else{
+    res.writeHead(404, {
+      "Content-type": "text/html",      
+      "my-own-header": "hello-world"})
+    res.end("<h1> Page not found! </h1>")
+  }
+})
+
+
+server.listen(PORT, `127.0.0.1`, ()=>{
+  console.log(`listening on port:${PORT}`)
 })
 
 
