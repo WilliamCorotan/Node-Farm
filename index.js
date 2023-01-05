@@ -1,4 +1,42 @@
+//import fs module ni nodeJS
 const fs = require('fs')
+
+//nodeJS ay yung backend ng JS, php, python, c#
+// method (        path     ,  encoder , callback function(errorMessage, data)) 
+fs.readFile(`./txt/start.txt`, `utf-8`, (error,startData)=>{
+  // console.log(startData)
+  // console.log(typeof startData)
+
+  fs.readFile(`./txt/${startData}.txt`,`utf-8`,function(error, readThisData){
+    //console.log(startData==='read-this')
+    //console.log(readThisData)
+    fs.readFile(`./txt/append.txt`,`utf-8`,(error, appendData)=>{
+      console.log(appendData)
+      fs.writeFile(`./txt/final.txt`,`${readThisData}\n\n${appendData}`,`utf-8`,(error)=>{
+        console.log("File has been written")
+      })
+    })
+    
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // //  method (        path     ,  encoder, callback function()) 
 // fs.readFile(`./txt/start.txt`, `utf-8`, (err, data1) => {
